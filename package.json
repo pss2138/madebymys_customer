@@ -4,14 +4,21 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --device 'Shawn'",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
+    "@react-navigation/native": "^7.0.19",
+    "@react-navigation/native-stack": "^7.3.3",
+    "@tamagui/themes": "^1.125.31",
     "react": "19.0.0",
-    "react-native": "0.78.1"
+    "react-native": "^0.78.1",
+    "react-native-orientation-locker": "^1.7.0",
+    "react-native-safe-area-context": "^5.3.0",
+    "react-native-screens": "^4.10.0",
+    "tamagui": "^1.125.31"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
