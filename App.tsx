@@ -1,9 +1,11 @@
-import {NavigationContainer} from '@react-navigation/native';
 import {FC, useEffect} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import LoginPage from './src/pages/LoginPage';
 import Orientation from 'react-native-orientation-locker';
-import {Stack} from './src/types/navigation';
+import NavigationWrapper from './src/routes/navigation';
+import {PaperProvider} from 'react-native-paper';
+import {theme} from './src/style/global';
+import {Provider} from 'react-redux';
+import {store} from './src/store';
 
 const App: FC = () => {
   useEffect(() => {
@@ -11,17 +13,13 @@ const App: FC = () => {
   });
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            component={LoginPage}
-            // options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <SafeAreaProvider>
+          <NavigationWrapper />
+        </SafeAreaProvider>
+      </PaperProvider>
+    </Provider>
   );
 };
 
