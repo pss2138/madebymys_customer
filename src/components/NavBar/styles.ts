@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  lable: {
+  label: {
     color: theme.colors.black,
     fontSize: theme.fonts.titleSmall.fontSize,
   },

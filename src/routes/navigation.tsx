@@ -106,6 +106,8 @@ export const NavigationWrapper: FC = () => {
 
   return (
     <NavigationContainer>
+      {/* <LoginStackNavigator /> */}
+
       {token ? (
         <View style={styles.container}>
           <View style={styles.nav}>

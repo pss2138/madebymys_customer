@@ -31,7 +31,7 @@ const NavBar: FC = () => {
         return (
           <Button
             style={styles.button}
-            labelStyle={[styles.lable, {fontWeight: isActive ? 'bold' : '400'}]}
+            labelStyle={[styles.label, {fontWeight: isActive ? 'bold' : '400'}]}
             contentStyle={styles.content}
             key={screen.name}
             icon={() => (
