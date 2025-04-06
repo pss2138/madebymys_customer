@@ -9,12 +9,15 @@ import SettingsPage from '../pages/SettingsPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectToken} from '../slices/userSlice';
+import {View} from 'react-native';
+import styles from './styles';
+import NavBar from '../components/NavBar';
 
 type LoginStackParamList = {
   Login: undefined;
 };
 
-type MainStackParamList = {
+export type MainStackParamList = {
   ProductsList: undefined;
   ProductShopping: undefined;
   MyOrders: undefined;
@@ -25,7 +28,7 @@ type MainStackParamList = {
 const LoginStack = createNativeStackNavigator<LoginStackParamList>();
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
-export const LoginStackNavigator: FC = () => {
+const LoginStackNavigator: FC = () => {
   return (
     <LoginStack.Navigator>
       <LoginStack.Screen
@@ -37,46 +40,84 @@ export const LoginStackNavigator: FC = () => {
   );
 };
 
-export const MainStackNavigator: FC = () => {
+type ScreenType = {
+  name: keyof MainStackParamList;
+  title: string;
+  component: FC;
+  icon: string;
+  iconActive: string;
+};
+
+export const mainScreensList: ScreenType[] = [
+  {
+    name: 'ProductsList',
+    title: 'Products',
+    component: ProductsListPage,
+    icon: 'home-outline',
+    iconActive: 'home',
+  },
+  {
+    name: 'ProductShopping',
+    title: 'Shop',
+    component: ProductShoppingPage,
+    icon: 'shopping-outline',
+    iconActive: 'shopping',
+  },
+  {
+    name: 'MyOrders',
+    title: 'Orders',
+    component: MyOrdersPage,
+    icon: 'file-document-outline',
+    iconActive: 'file-document',
+  },
+  {
+    name: 'MyCart',
+    title: 'Cart',
+    component: MyCartPage,
+    icon: 'cart-outline',
+    iconActive: 'cart',
+  },
+  {
+    name: 'Settings',
+    icon: 'cog-outline',
+    title: 'Settings',
+    component: SettingsPage,
+    iconActive: 'cog',
+  },
+];
+
+const MainStackNavigator: FC = () => {
   return (
     <MainStack.Navigator>
-      <MainStack.Screen
-        name="ProductsList"
-        component={ProductsListPage}
-        options={{headerShown: false}}
-      />
-      <MainStack.Screen
-        name="ProductShopping"
-        component={ProductShoppingPage}
-        options={{headerShown: false}}
-      />
-      <MainStack.Screen
-        name="MyOrders"
-        component={MyOrdersPage}
-        options={{headerShown: false}}
-      />
-      <MainStack.Screen
-        name="MyCart"
-        component={MyCartPage}
-        options={{headerShown: false}}
-      />
-      <MainStack.Screen
-        name="Settings"
-        component={SettingsPage}
-        options={{headerShown: false}}
-      />
+      {mainScreensList.map((screen, index) => (
+        <MainStack.Screen
+          key={index}
+          name={screen.name}
+          component={screen.component}
+          options={{headerShown: false}}
+        />
+      ))}
     </MainStack.Navigator>
   );
 };
 
-const NavigationWrapper: FC = () => {
+export const NavigationWrapper: FC = () => {
   const token = useSelector(selectToken);
 
   return (
     <NavigationContainer>
-      {token ? <MainStackNavigator /> : <LoginStackNavigator />}
+      {token ? (
+        <View style={styles.container}>
+          <View style={styles.nav}>
+            <NavBar />
+          </View>
+          <View style={styles.screen}>
+            <MainStackNavigator />
+          </View>
+        </View>
+      ) : (
+        <LoginStackNavigator />
+      )}
     </NavigationContainer>
   );
 };
-
-export default NavigationWrapper;

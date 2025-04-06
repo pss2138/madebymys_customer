@@ -6,7 +6,7 @@ const ProductsListPage: FC = () => {
   const theme = useTheme();
   return (
     <View>
-      <Text style={{backgroundColor: theme.colors.primary}}>
+      <Text style={{backgroundColor: theme.colors.secondary}}>
         Products List Page
       </Text>
     </View>

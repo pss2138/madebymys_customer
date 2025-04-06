@@ -1,10 +1,57 @@
-import {FC} from 'react';
-import {Text, View} from 'react-native';
+import {FC, useEffect, useState} from 'react';
+import {Button, Icon} from 'react-native-paper';
+import styles from './styles';
+import {View} from 'react-native';
+import {NavigationContainerRef, useNavigation} from '@react-navigation/native';
+import {mainScreensList, MainStackParamList} from '../../routes/navigation';
+import {theme} from '../../style/global';
 
 const NavBar: FC = () => {
+  type NavigationProp = NavigationContainerRef<MainStackParamList>;
+
+  const navigation = useNavigation<NavigationProp>();
+  const [currentRoute, setCurrentRoute] = useState<string | undefined>();
+
+  useEffect(() => {
+    const route = navigation.getCurrentRoute?.();
+    setCurrentRoute(route?.name);
+
+    const unsubscribe = navigation.addListener('state', () => {
+      const updatedRoute = navigation.getCurrentRoute?.();
+      setCurrentRoute(updatedRoute?.name);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
-    <View>
-      <Text>Login Page</Text>
+    <View style={styles.container}>
+      {mainScreensList.map(screen => {
+        const isActive = screen.name === currentRoute;
+        return (
+          <Button
+            style={styles.button}
+            labelStyle={[styles.lable, {fontWeight: isActive ? 'bold' : '400'}]}
+            contentStyle={styles.content}
+            key={screen.name}
+            icon={() => (
+              <View style={{transform: [{translateX: -4}]}}>
+                <Icon
+                  source={isActive ? screen.iconActive : screen.icon}
+                  size={theme.fonts.titleLarge.fontSize}
+                  color={theme.colors.black}
+                />
+              </View>
+            )}
+            mode={'contained'}
+            compact={true}
+            onPress={() => {
+              navigation.navigate(screen.name as keyof MainStackParamList);
+            }}>
+            {screen.title}
+          </Button>
+        );
+      })}
     </View>
   );
 };
