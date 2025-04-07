@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
   },
+  headerTitle: {
+    fontSize: theme.fonts.titleLarge.fontSize,
+  },
 });
 
 export default styles;

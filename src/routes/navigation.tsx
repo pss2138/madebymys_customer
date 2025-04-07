@@ -46,6 +46,7 @@ type ScreenType = {
   component: FC;
   icon: string;
   iconActive: string;
+  showInNavBar?: boolean;
 };
 
 export const mainScreensList: ScreenType[] = [
@@ -62,6 +63,7 @@ export const mainScreensList: ScreenType[] = [
     component: ProductShoppingPage,
     icon: 'shopping-outline',
     iconActive: 'shopping',
+    showInNavBar: false,
   },
   {
     name: 'MyOrders',
@@ -94,7 +96,12 @@ const MainStackNavigator: FC = () => {
           key={index}
           name={screen.name}
           component={screen.component}
-          options={{headerShown: false}}
+          options={{
+            // headerShown: false,
+            headerTransparent: true,
+            headerTitle: screen.title,
+            headerTitleStyle: styles.headerTitle,
+          }}
         />
       ))}
     </MainStack.Navigator>
@@ -106,8 +113,6 @@ export const NavigationWrapper: FC = () => {
 
   return (
     <NavigationContainer>
-      {/* <LoginStackNavigator /> */}
-
       {token ? (
         <View style={styles.container}>
           <View style={styles.nav}>
