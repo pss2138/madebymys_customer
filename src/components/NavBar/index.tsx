@@ -10,9 +10,9 @@ import {
 import {mainScreensList, MainStackParamList} from '../../routes/navigation';
 import {theme} from '../../style/global';
 
-const NavBar: FC = () => {
-  type NavigationProp = NavigationContainerRef<MainStackParamList>;
+export type NavigationProp = NavigationContainerRef<MainStackParamList>;
 
+const NavBar: FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const [currentRoute, setCurrentRoute] = useState<string | undefined>();
 

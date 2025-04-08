@@ -12,6 +12,7 @@ const ProductsListPage: FC = () => {
 
   const products: productThumbnailType[] = [
     {
+      id: '1',
       title: 'Cobra',
       minPrice: 15,
       maxPrice: 15,
@@ -22,6 +23,7 @@ const ProductsListPage: FC = () => {
       tag: 'featured',
     },
     {
+      id: '2',
       title: 'Mamushi',
       minPrice: 15,
       maxPrice: 17,
@@ -32,6 +34,7 @@ const ProductsListPage: FC = () => {
       tag: 'new',
     },
     {
+      id: '3',
       title: 'Miami Blue',
       minPrice: 15,
       maxPrice: 20,
@@ -42,6 +45,7 @@ const ProductsListPage: FC = () => {
       tag: 'discount',
     },
     {
+      id: '4',
       title: 'Moody Girl',
       minPrice: 15,
       maxPrice: 20,
@@ -52,6 +56,7 @@ const ProductsListPage: FC = () => {
       tag: 'featured',
     },
     {
+      id: '5',
       title: 'Rattle',
       minPrice: 15,
       maxPrice: 17,
@@ -62,6 +67,7 @@ const ProductsListPage: FC = () => {
       tag: 'new',
     },
     {
+      id: '6',
       title: 'Whats New',
       minPrice: 15,
       maxPrice: 15,
@@ -72,6 +78,7 @@ const ProductsListPage: FC = () => {
       tag: 'new',
     },
     {
+      id: '7',
       title: 'Work That',
       minPrice: 15,
       maxPrice: 20,

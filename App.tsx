@@ -1,3 +1,4 @@
+import 'react-native-reanimated';
 import {FC, useEffect} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Orientation from 'react-native-orientation-locker';

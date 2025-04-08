@@ -1,12 +1,18 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {FC} from 'react';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
+import {FC, useState} from 'react';
 import LoginPage from '../pages/LoginPage';
 import ProductsListPage from '../pages/ProductsListPage';
 import ProductShoppingPage from '../pages/ProductShoppingPage';
 import MyOrdersPage from '../pages/MyOrdersPage';
 import MyCartPage from '../pages/MyCartPage';
 import SettingsPage from '../pages/SettingsPage';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectToken} from '../slices/userSlice';
 import {View} from 'react-native';
@@ -19,11 +25,14 @@ type LoginStackParamList = {
 
 export type MainStackParamList = {
   ProductsList: undefined;
-  ProductShopping: undefined;
+  ProductShopping: {productId: string};
   MyOrders: undefined;
   MyCart: undefined;
   Settings: undefined;
 };
+
+export type MainStackNavigationType =
+  NativeStackNavigationProp<MainStackParamList>;
 
 const LoginStack = createNativeStackNavigator<LoginStackParamList>();
 const MainStack = createNativeStackNavigator<MainStackParamList>();
@@ -47,6 +56,7 @@ type ScreenType = {
   icon: string;
   iconActive: string;
   showInNavBar?: boolean;
+  showHeader?: boolean;
 };
 
 export const mainScreensList: ScreenType[] = [
@@ -64,6 +74,7 @@ export const mainScreensList: ScreenType[] = [
     icon: 'shopping-outline',
     iconActive: 'shopping',
     showInNavBar: false,
+    showHeader: false,
   },
   {
     name: 'MyOrders',
@@ -97,7 +108,7 @@ const MainStackNavigator: FC = () => {
           name={screen.name}
           component={screen.component}
           options={{
-            // headerShown: false,
+            headerShown: screen.showHeader !== false,
             headerTransparent: true,
             headerTitle: screen.title,
             headerTitleStyle: styles.headerTitle,
@@ -111,11 +122,25 @@ const MainStackNavigator: FC = () => {
 export const NavigationWrapper: FC = () => {
   const token = useSelector(selectToken);
 
+  const navigationRef = createNavigationContainerRef();
+  const [currentRoute, setCurrentRoute] = useState<string | undefined>();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onStateChange={() => {
+        if (navigationRef.isReady()) {
+          const current = navigationRef.getCurrentRoute()?.name;
+          setCurrentRoute(current);
+        }
+      }}>
       {token ? (
         <View style={styles.container}>
-          <View style={styles.nav}>
+          <View
+            style={[
+              styles.nav,
+              currentRoute === 'ProductShopping' && styles.hideNav,
+            ]}>
             <NavBar />
           </View>
           <View style={styles.screen}>

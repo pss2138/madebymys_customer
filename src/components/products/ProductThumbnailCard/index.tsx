@@ -1,10 +1,13 @@
 import {FC} from 'react';
 import styles from './styles';
 import {Icon, MD3Theme, Text} from 'react-native-paper';
-import {Image, View} from 'react-native';
+import {Image, Pressable, View} from 'react-native';
 import {ChipsType, TagType} from '../../global/Chips';
+import {useNavigation} from '@react-navigation/native';
+import {MainStackNavigationType} from '../../../routes/navigation';
 
 export type productThumbnailType = {
+  id: string;
   title: string;
   minPrice: number;
   maxPrice: number;
@@ -26,8 +29,17 @@ const ProductThumbnailCard: FC<ProductThumpnailProps> = ({
   theme,
   chips,
 }) => {
+  const navigation = useNavigation<MainStackNavigationType>();
+  const goProductShopping = (productId: string) => {
+    navigation.navigate('ProductShopping', {productId});
+  };
+
   return (
-    <View style={styles.cardContainer}>
+    <Pressable
+      onPress={() => {
+        goProductShopping(product.id);
+      }}
+      style={styles.cardContainer}>
       <View style={styles.cardContent}>
         <View style={styles.imageContainer}>
           <Image source={product.imageUri} style={styles.image} />
@@ -57,7 +69,7 @@ const ProductThumbnailCard: FC<ProductThumpnailProps> = ({
           )}
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

@@ -8,8 +8,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   nav: {
-    width: 100,
+    width: 80,
     backgroundColor: theme.colors.primary,
+  },
+  hideNav: {
+    width: 0,
   },
   screen: {
     flex: 1,
