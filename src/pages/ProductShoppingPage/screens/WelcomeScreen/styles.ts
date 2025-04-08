@@ -3,12 +3,12 @@ import {theme} from '../../../../style/global';
 
 // Styles
 const styles = StyleSheet.create({
-  text: {
-    textAlign: 'center',
-    fontSize: theme.fonts.titleLarge.fontSize,
-    fontWeight: theme.fonts.titleLarge.fontWeight,
-    lineHeight: theme.fonts.titleLarge.lineHeight,
-    margin: 10,
+  container: {
+    flex: 1,
+    height: '100%',
+    paddingTop: 40,
+    paddingBottom: 80,
+    overflow: 'visible',
   },
 });
 

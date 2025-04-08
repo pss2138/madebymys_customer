@@ -7,6 +7,7 @@ import {PaperProvider} from 'react-native-paper';
 import {theme} from './src/style/global';
 import {Provider} from 'react-redux';
 import {store} from './src/store';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App: FC = () => {
   useEffect(() => {
@@ -14,13 +15,15 @@ const App: FC = () => {
   });
 
   return (
-    <Provider store={store}>
-      <PaperProvider theme={theme}>
-        <SafeAreaProvider>
-          <NavigationWrapper />
-        </SafeAreaProvider>
-      </PaperProvider>
-    </Provider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <Provider store={store}>
+        <PaperProvider theme={theme}>
+          <SafeAreaProvider>
+            <NavigationWrapper />
+          </SafeAreaProvider>
+        </PaperProvider>
+      </Provider>
+    </GestureHandlerRootView>
   );
 };
 

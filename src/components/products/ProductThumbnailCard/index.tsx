@@ -9,6 +9,7 @@ import {MainStackNavigationType} from '../../../routes/navigation';
 export type productThumbnailType = {
   id: string;
   title: string;
+  description?: string;
   minPrice: number;
   maxPrice: number;
   origPrice: number;

@@ -13,7 +13,8 @@ type ProductSelectionAreaProps = {
   zIndex: number;
 };
 
-const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
+export const {width: screenWidth, height: screenHeight} =
+  Dimensions.get('window');
 const screens = [
   <WelcomeScreen />,
   <SizingScreen />,

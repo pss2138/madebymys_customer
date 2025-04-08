@@ -15,7 +15,7 @@ const ProductsListPage: FC = () => {
       id: '1',
       title: 'Cobra',
       minPrice: 15,
-      maxPrice: 15,
+      maxPrice: 20,
       origPrice: 25,
       imageUri: require('../../../assets/images/products/cobra2024.png'),
       purchaseCount: 10,
