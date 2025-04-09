@@ -1,9 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {theme} from '../../../style/global';
-import {
-  screenHeight,
-  screenWidth,
-} from '../../../pages/ProductShoppingPage/ProductSelectionArea';
 
 // Styles
 const styles = StyleSheet.create({

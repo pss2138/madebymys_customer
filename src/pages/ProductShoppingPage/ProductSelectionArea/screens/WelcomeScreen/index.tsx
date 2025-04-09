@@ -1,7 +1,9 @@
 import {FC} from 'react';
 import styles from './styles';
 import {ScrollView, View} from 'react-native';
-import ZoomableImage from '../../../../components/global/ZoomableImage';
+import ZoomableImage from '../../../../../components/global/ZoomableImage';
+import {BasicModalType} from '../../..';
+import ProductDetailModal from '../../../../../components/productShopping/ProductDetailModal';
 
 export const productDetailInfo = {
   id: '1',
@@ -9,7 +11,7 @@ export const productDetailInfo = {
   minPrice: 15,
   maxPrice: 20,
   origPrice: 25,
-  imageUri: require('../../../../../assets/images/products/cobra2024.png'),
+  imageUri: require('../../../../../../assets/images/products/cobra2024.png'),
   purchaseCount: 10,
   reviewPoint: 4.9,
   tag: 'featured',
@@ -44,23 +46,23 @@ export const productDetailInfo = {
   images: [
     {
       id: '11',
-      uri: require('../../../../../assets/images/products/detail/cobra_plain.png'),
+      uri: require('../../../../../../assets/images/products/detail/cobra_plain.png'),
     },
     {
       id: '12',
-      uri: require('../../../../../assets/images/products/detail/cobra_polka.png'),
+      uri: require('../../../../../../assets/images/products/detail/cobra_polka.png'),
     },
     {
       id: '13',
-      uri: require('../../../../../assets/images/products/detail/cobra_charms_polka.png'),
+      uri: require('../../../../../../assets/images/products/detail/cobra_charms_polka.png'),
     },
     {
       id: '14',
-      uri: require('../../../../../assets/images/products/detail/package_bundle.png'),
+      uri: require('../../../../../../assets/images/products/detail/package_bundle.png'),
     },
     {
       id: '15',
-      uri: require('../../../../../assets/images/products/detail/size_guide.png'),
+      uri: require('../../../../../../assets/images/products/detail/size_guide.png'),
     },
   ],
   options: [
@@ -123,7 +125,11 @@ export const productDetailInfo = {
   ],
 };
 
-const WelcomeScreen: FC = () => {
+const WelcomeScreen: FC<BasicModalType> = ({
+  isModalVisible,
+  closeModal,
+  zIndex,
+}) => {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -135,6 +141,14 @@ const WelcomeScreen: FC = () => {
         })}
         <View style={{width: 120}} />
       </ScrollView>
+
+      <ProductDetailModal
+        isModalVisible={isModalVisible}
+        closeModal={closeModal}
+        title={productDetailInfo.title}
+        description={productDetailInfo.description}
+        zIndex={zIndex}
+      />
     </View>
   );
 };

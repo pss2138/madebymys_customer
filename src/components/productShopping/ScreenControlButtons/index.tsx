@@ -9,6 +9,7 @@ type ScreenControlButtonsProps = {
   currentIndex: number;
   zIndex: number;
   lastCarouselIndex: number;
+  openProductDetailModal: () => void;
 };
 
 const ScreenControlButtons: FC<ScreenControlButtonsProps> = ({
@@ -16,6 +17,7 @@ const ScreenControlButtons: FC<ScreenControlButtonsProps> = ({
   currentIndex,
   zIndex,
   lastCarouselIndex,
+  openProductDetailModal,
 }) => {
   return (
     <View style={[styles.container, {zIndex}]}>
@@ -25,6 +27,12 @@ const ScreenControlButtons: FC<ScreenControlButtonsProps> = ({
         onPress={() => carouselRef.current?.prev()}>
         {'<'} Prev
       </Button>
+
+      {currentIndex === 0 && (
+        <Button style={styles.button} onPress={openProductDetailModal}>
+          Product Details
+        </Button>
+      )}
 
       <Button
         style={styles.button}
