@@ -7,9 +7,9 @@ interface InputBoxProps<T> {
   title: string;
   textValue: string;
   setTextValue: React.Dispatch<React.SetStateAction<T>>;
-  buttonTitle: string;
-  buttonAction: () => void;
-  textLength: number | undefined;
+  buttonTitle?: string;
+  buttonAction?: () => void;
+  textLength?: number | undefined;
 }
 
 const InputBox = <T,>({
@@ -39,9 +39,11 @@ const InputBox = <T,>({
         />
       </View>
 
-      <Button style={styles.button} mode="contained" onPress={buttonAction}>
-        {buttonTitle}
-      </Button>
+      {buttonTitle && (
+        <Button style={styles.button} mode="contained" onPress={buttonAction}>
+          {buttonTitle}
+        </Button>
+      )}
     </View>
   );
 };

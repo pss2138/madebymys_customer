@@ -4,30 +4,69 @@ import styles from './styles';
 import StatusNavBar from '../../components/productShopping/StatusNavBar';
 import ProductSelectionArea from './ProductSelectionArea';
 import SellerInteractionArea from '../../components/productShopping/SellerInteractionArea';
+import {useDispatch} from 'react-redux';
+import {setIsModalOpen} from '../../slices/componentSlice';
 
 export type BasicModalType = {
   isModalVisible: boolean;
   openModal: () => void;
   closeModal: () => void;
-  zIndex: number;
+  zIndex?: number;
 };
+export type SizingScreenModalType = {
+  isAddCharacterModalVisible: boolean;
+  openAddCharacterModal: () => void;
+  closeAddCharacterModal: () => void;
+  isSizeGuideModalVisible: boolean;
+  openSizeGuideModal: () => void;
+  closeSizeGuideModal: () => void;
+};
+export type ModalControlMap = {
+  welcome: BasicModalType;
+  sizing: SizingScreenModalType;
+};
+
 const ProductShoppingPage: FC = () => {
+  const dispatch = useDispatch();
   const zIndexs = {
     seller: 10,
     product: 0,
   };
   const [isWelcomeModalVisible, setIsWelcomeModalVisible] = useState(false);
-  const modalControl = {
+  const [isAddCharacterModalVisible, setIsAddCharacterModalVisible] =
+    useState(false);
+  const [isSizeGuideModalVisible, setIsSizeGuideModalVisible] = useState(false);
+  const modalControl: ModalControlMap = {
     welcome: {
       isModalVisible: isWelcomeModalVisible,
       openModal: () => {
-        console.log('pressed');
         setIsWelcomeModalVisible(true);
+        dispatch(setIsModalOpen(true));
       },
       closeModal: () => {
         setIsWelcomeModalVisible(false);
+        dispatch(setIsModalOpen(false));
       },
-      zIndex: zIndexs.product,
+    },
+    sizing: {
+      isAddCharacterModalVisible,
+      openAddCharacterModal: () => {
+        setIsAddCharacterModalVisible(true);
+        dispatch(setIsModalOpen(true));
+      },
+      closeAddCharacterModal: () => {
+        setIsAddCharacterModalVisible(false);
+        dispatch(setIsModalOpen(false));
+      },
+      isSizeGuideModalVisible,
+      openSizeGuideModal: () => {
+        setIsSizeGuideModalVisible(true);
+        dispatch(setIsModalOpen(true));
+      },
+      closeSizeGuideModal: () => {
+        setIsSizeGuideModalVisible(false);
+        dispatch(setIsModalOpen(false));
+      },
     },
   };
   return (

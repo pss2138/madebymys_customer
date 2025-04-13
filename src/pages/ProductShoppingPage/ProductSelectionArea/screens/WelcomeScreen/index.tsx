@@ -125,11 +125,7 @@ export const productDetailInfo = {
   ],
 };
 
-const WelcomeScreen: FC<BasicModalType> = ({
-  isModalVisible,
-  closeModal,
-  zIndex,
-}) => {
+const WelcomeScreen: FC<BasicModalType> = ({isModalVisible, closeModal}) => {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -147,7 +143,6 @@ const WelcomeScreen: FC<BasicModalType> = ({
         closeModal={closeModal}
         title={productDetailInfo.title}
         description={productDetailInfo.description}
-        zIndex={zIndex}
       />
     </View>
   );

@@ -7,11 +7,13 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import SizingScreen from './screens/SizingScreen';
 import OptionScreen from './screens/OptionScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
-import {BasicModalType} from '..';
+import {BasicModalType, SizingScreenModalType} from '..';
+import {useSelector} from 'react-redux';
+import {selectIsModalOpen} from '../../../slices/componentSlice';
 
 type ProductSelectionAreaProps = {
   zIndex: number;
-  modalControl: {welcome: BasicModalType};
+  modalControl: {welcome: BasicModalType; sizing: SizingScreenModalType};
 };
 export const {width: screenWidth, height: screenHeight} =
   Dimensions.get('window');
@@ -22,15 +24,15 @@ const ProductSelectionArea: FC<ProductSelectionAreaProps> = ({
 }) => {
   const carouselRef = useRef<ICarouselInstance>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const isModalOpen = useSelector(selectIsModalOpen);
 
   const screens = [
     <WelcomeScreen
       isModalVisible={modalControl.welcome.isModalVisible}
       openModal={modalControl.welcome.openModal}
       closeModal={modalControl.welcome.closeModal}
-      zIndex={zIndex}
     />,
-    <SizingScreen />,
+    <SizingScreen modalControl={modalControl.sizing} />,
     <OptionScreen />,
     <CheckoutScreen />,
   ];
@@ -53,7 +55,7 @@ const ProductSelectionArea: FC<ProductSelectionAreaProps> = ({
         }}
       />
 
-      {!modalControl.welcome.isModalVisible && (
+      {!isModalOpen && (
         <ScreenControlButtons
           carouselRef={carouselRef}
           currentIndex={currentIndex}

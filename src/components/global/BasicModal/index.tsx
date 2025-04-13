@@ -3,13 +3,13 @@ import styles from './styles';
 import {IconButton, Modal} from 'react-native-paper';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 
-interface TitleProps {
+interface BasicModalProps {
   content: any;
   isVisible: boolean;
   closeModal: () => void;
 }
 
-const BasicModal: FC<TitleProps> = ({content, isVisible, closeModal}) => {
+const BasicModal: FC<BasicModalProps> = ({content, isVisible, closeModal}) => {
   return (
     <Modal
       visible={isVisible}
